@@ -1,0 +1,14 @@
+.inputTask {
+    display: flex;
+
+}
+
+.inputTask__input {
+    height: 40px;
+    width: 300px
+}
+
+.inputTask__button {
+    height: 48px;
+    width: 50px
+}

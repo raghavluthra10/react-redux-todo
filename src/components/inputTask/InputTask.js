@@ -1,33 +1,40 @@
-import React, { useState } from 'react';
-import './InputTask.css';
+import React, { useState } from "react";
+import "./InputTask.css";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo } from '../../slices/todoSlice';
+import { addTodo } from "../../slices/todoSlice";
 
 const InputTask = () => {
+  // to read data from the store
+  const { todos } = useSelector((state) => state.todos);
 
-    const { updateTodo } = useSelector(state=> state);
-    const dispatch = useDispatch();
+  // to dispatch actions we will use DISPATCH
+  const dispatch = useDispatch();
 
+  const [todo, setTodo] = useState({ task: "", id: null });
 
-    const [ todo, setTodo ] = useState('');
+  const addTodoToReduxState = (e) => {
+    e.preventDefault();
+    console.log("add todo button is working!!");
+    dispatch(addTodo(todo));
+  };
 
-    const addTodo = (e) => {
-        e.preventDefault();
-        console.log('add todo button is working!!')
-        // console.log(todo);
+  return (
+    <form className="inputTask" onSubmit={addTodoToReduxState}>
+      <input
+        className="inputTask__input"
+        label="Enter todo..."
+        value={todo.task}
+        onChange={(e) =>
+          setTodo({ task: e.target.value, id: todos.length + 1 })
+        }
+      />
 
-        // dispatch(addTodo(todo))
-
-        // console.log(updateTodo)
-    }; 
-
-  return <form className="inputTask" onSubmit={addTodo} >
-
-    <input className="inputTask__input" label="Enter todo..." value={todo} onChange={e => setTodo(e.target.value)} />
-
-    <button  className="inputTask__button" type="submit" > Add </button>
-
-  </form>;
+      <button className="inputTask__button" type="submit">
+        {" "}
+        Add{" "}
+      </button>
+    </form>
+  );
 };
 
 export default InputTask;

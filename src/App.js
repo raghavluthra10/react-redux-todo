@@ -1,22 +1,18 @@
 import './App.css';
 import DisplayTasks from './components/displayTasks/DisplayTasks';
 import InputTask from './components/inputTask/InputTask';
-
-
-const tasks = [
-  { task: 'task 1', id: 1 },
-  { task: 'task 2', id: 2 },
-  { task: 'task 3', id: 3 },
-  { task: 'task 4', id: 4 },
-]
+import { useDispatch, useSelector } from "react-redux";
 
 
 function App() {
+
+  const { todos } = useSelector(state=> state.todos);
+
   return (
     <div className="App">
       <InputTask  />
       
-      {tasks.map((task) => {
+      {todos.map((task) => {
         return <DisplayTasks 
           todo={task.task} 
           id={task.id}

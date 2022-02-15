@@ -1,27 +1,30 @@
-import React from 'react';
+import React from "react";
+import { deleteTask } from "../../slices/todoSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const DisplayTasks = ({ todo, id }) => {
+  // to read data from the store
+  const { todos } = useSelector((state) => state.todos);
 
-    const deleteTodo = (e, id) => {
-        console.log('delete button is clicked!!', id);
-    };
+  // to dispatch actions we will use DISPATCH
+  const dispatch = useDispatch();
 
-    const editTodo = (e, id) => {
-        console.log('edit button is clicked!!', id)
-    };
+  const deleteTaskFromReduxState = (e, id) => {
+    dispatch(deleteTask(id));
+  };
 
-  return <div className="displayTasks" >
-      <div>
-          {todo}
-      </div>
-      <button onClick={(e) => deleteTodo(e, id)} >
-        Delete
-      </button>
-      <button onClick={(e) => editTodo(e, id)} >  
-          Edit
-      </button>
+  const editTodo = (e, id) => {
+    console.log("edit button is clicked!!", id);
+  };
+
+  return (
+    <div className="displayTasks">
+      <div>{todo}</div>
+      <button onClick={(e) => deleteTaskFromReduxState(e, id)}>Delete</button>
+      <button onClick={(e) => editTodo(e, id)}>Edit</button>
       <hr />
-  </div>;
+    </div>
+  );
 };
 
 export default DisplayTasks;

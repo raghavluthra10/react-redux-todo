@@ -15,9 +15,15 @@ const updateTodo = createSlice({
       const { payload } = param;
       state.todos = [...state.todos, payload];
     },
-    // subTodo
+    deleteTask: (state, param) => {
+      const { payload } = param;
+      const stateAfterTaskDeleted = state.todos.filter(
+        (task) => task.id !== payload
+      );
+      state.todos = [...stateAfterTaskDeleted];
+    },
   },
 });
 
-export const { addTodo } = updateTodo.actions;
+export const { addTodo, deleteTask } = updateTodo.actions;
 export default updateTodo.reducer;

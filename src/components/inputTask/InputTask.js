@@ -14,7 +14,6 @@ const InputTask = () => {
 
   const addTodoToReduxState = (e) => {
     e.preventDefault();
-    console.log("add todo button is working!!");
     dispatch(addTodo(todo));
   };
 
